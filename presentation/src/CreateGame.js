@@ -7,7 +7,7 @@ export default class CreateGame extends React.Component {
         mode: "",
     } 
     handleSubmit = (event) => {
-        event.preventDefault();
+        event.preventDefault(); 
         const api_url = process.env.REACT_APP_API_URL;
         fetch(`${api_url}/games`, {
             method: "POST",
@@ -46,4 +46,3 @@ export default class CreateGame extends React.Component {
          )
     }
 }
-
