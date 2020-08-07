@@ -1,12 +1,20 @@
 import React from 'react';
-import Game from '../../data/games';
 
-const Game = (props) =>{
-return [
+
+const Game = ({game, eraseGame, refresh}) =>{
+return (
     <li>
-        {games.title}
+        {game.title}
+        <button className="del-btn"
+        onClick={() => eraseGame(game._id, refresh)}> 
+            x
+        </button>
+        
     </li>
-]
+   )
 }
 
 export default Game
+
+
+
