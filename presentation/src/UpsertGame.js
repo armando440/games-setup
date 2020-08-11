@@ -1,29 +1,24 @@
 import React from 'react';
 
-export default class CreateGame extends React.Component {
+export default class UpsertGame extends React.Component {
     state = {
-        title: "",
-        developer: "",
-        mode: "",
+        title: this.props.game.title,
+        developer: this.props.game.developer,
+        mode: this.props.game.mode
     } 
      handleSubmit = (event) => {
         event.preventDefault(); 
         const api_url = process.env.REACT_APP_API_URL;
-        fetch(`${api_url}/games`, {
-            method: "POST",
+        fetch(`${api_url}/games/${this.props.game._id}`, {
+            method: "PUT",
             headers: {
                 "content-type": "application/json"
             },
             body: JSON.stringify(this.state)
         }) .then(response => response.json())
           .then(data => console.log(data))
-          .then(() => {
-              this.setState({
-                title: "",
-                developer: "",
-                mode: ""
-              })
-          }).then(this.props.refresh)
+          .then(this.props.toggleForm)
+        .then(this.props.refresh)
     }
     handleChange = (event) => {
         this.setState({ [event.target.name]: event.target.value });
@@ -41,9 +36,9 @@ export default class CreateGame extends React.Component {
                      placeholder="developer"
                      value={this.state.developer}
                      onChange={this.handleChange}/>
-                  <input type="submit" value="Add Game"/>
+                  <input type="submit" value="Update Game"/>
              </form>
          )
     }
 }
-//40
+
